@@ -1,0 +1,15 @@
+.canvas {
+  height : 500px;
+  width : 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pixelrow {
+  flex: auto;
+  display: flex;
+}
+
+.pixel {
+  flex: auto;
+}
