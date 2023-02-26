@@ -5,8 +5,8 @@
   flex-direction: column;
 }
 
-.pixelrow {
-  flex: auto;
+.pixel-row {
+  flex: 1;
   display: flex;
 }
 
