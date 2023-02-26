@@ -1,3 +1,26 @@
+function getColors(pixel){
+  colorString = pixel.style.backgroundColor.slice(4,-1);
+  colors = colorString.split(',').map((color)=>color.trim());
+  colors = colors.map((color)=>parseInt(color));
+  return colors;
+}
+
+function setRandomColor(pixel){
+  if (pixel.style.backgroundColor == ""){
+    newRGB = `rgb(${Math.random() * 256},${Math.random() * 256},${Math.random() * 256})`;
+    pixel.setAttribute('pass', 0);
+  }else{
+    pass = parseInt(pixel.getAttribute('pass'));
+    if (pass >= 10){
+      return;
+    }
+    colors = getColors(pixel).map((color)=>color * (10-pass-1) / (10-pass));
+    newRGB = `rgb(${colors.join(',')})`;
+    pixel.setAttribute('pass', pass + 1);
+  }
+  pixel.style.backgroundColor = newRGB;
+}
+
 function cleanCanvas(){
   pixelRows = document.querySelectorAll('.pixel-row');
   pixelRows.forEach((pixelRow)=>pixelRow.remove());
@@ -19,7 +42,7 @@ function createCanvas(res){
   pixels = document.querySelectorAll('.pixel');
 
   function pixelHover(e){
-    this.style.backgroundColor = 'black';
+    setRandomColor(this);
   }
 
   pixels.forEach((pixel)=>{
